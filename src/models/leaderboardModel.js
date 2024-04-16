@@ -1,35 +1,39 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const leaderboardSchema = new mongoose.Schema(
     {
         gameId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Game',
+            ref: "Game",
+            required: true
         },
         description: {
             type: String
         },
-        data: [
-            {
-                username: {
-                    type: String,
-                    required: true
-                },
-                score: {
-                    type: String,
-                    required: true
-                },
-                totalMatches: {
-                    type: String,
-                    required: true
+        data: {
+            type: [
+                {
+                    userId: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        required: true
+                    },
+                    score: {
+                        type: Number,
+                        required: true
+                    },
+                    totalMatches: {
+                        type: Number,
+                        required: true,
+                        default: 1
+                    }
                 }
-            }
-        ]
-
+            ],
+            default: []
+        }
     },
     { timestamps: true }
-)
+);
 
 const Leaderboard = mongoose.model("Leaderboard", leaderboardSchema);
 
-export default Leaderboard
+export default Leaderboard;

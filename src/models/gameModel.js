@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const gameSchema = new mongoose.Schema(
     {
@@ -28,8 +28,8 @@ const gameSchema = new mongoose.Schema(
         }
     },
     { timestamps: true }
-)
+);
 
 const Game = mongoose.model("Game", gameSchema);
 
-export default Game
+export default Game;
