@@ -22,7 +22,14 @@ const gameSchema = new mongoose.Schema(
                 type: String
             }
         ],
+        poster: {
+            type: String
+        },
         isMultiplayer: {
+            type: Boolean,
+            default: false
+        },
+        comingSoon: {
             type: Boolean,
             default: false
         }
