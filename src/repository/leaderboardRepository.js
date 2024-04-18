@@ -34,6 +34,11 @@ class LeaderboardRepository {
             { new: true }
         );
     }
+
+    async getLeaderboard(gameId, fields = "") {
+        const leaderboard = await Leaderboard.findOne({ gameId }, fields);
+        return leaderboard;
+    }
 }
 
 export default LeaderboardRepository;

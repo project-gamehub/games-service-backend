@@ -6,9 +6,11 @@ class GamesService {
     }
 
     async getAllGames() {
-        const games = await this.gameRepository.getAllGames();
+        const games = await this.gameRepository.getAllGames(
+            "-createdAt -updatedAt -__v"
+        );
         return games;
     }
 }
 
-export default GamesService
+export default GamesService;

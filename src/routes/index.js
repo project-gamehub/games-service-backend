@@ -1,5 +1,9 @@
 import express from "express";
-import { addMatchScore, getAllGames } from "../controllers/index.js";
+import {
+    addMatchScore,
+    getAllGames,
+    getLeaderboard
+} from "../controllers/index.js";
 import { asyncEventHandler } from "../errors/errorUtils/index.js";
 import { errorMiddleware } from "../errors/errorMiddlewares/index.js";
 import { verifyAccessToken } from "../middlewares/index.js";
@@ -18,10 +22,9 @@ router.patch(
     asyncEventHandler(addMatchScore)
 );
 
-router.get(
-    "/games",
-    asyncEventHandler(getAllGames)
-);
+router.get("/games", asyncEventHandler(getAllGames));
+
+router.get("/leaderboard/:gameId", asyncEventHandler(getLeaderboard));
 
 router.use(errorMiddleware);
 

@@ -40,6 +40,14 @@ class LeaderboardService {
             );
         }
     }
+
+    async getLeaderboard(gameId) {
+        const leaderboard = await this.leaderboardRepository.getLeaderboard(
+            gameId,
+            "-createdAt -updatedAt -__v"
+        );
+        return leaderboard;
+    }
 }
 
 export default LeaderboardService;

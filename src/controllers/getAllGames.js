@@ -1,4 +1,4 @@
-import GamesService from "../services/gamesService.js"
+import GamesService from "../services/gamesService.js";
 
 const getAllGames = async (req, res) => {
     const gamesService = new GamesService();
@@ -7,7 +7,7 @@ const getAllGames = async (req, res) => {
         message: "Games fetched successfully",
         data: gamesData,
         success: true
-    })
-}
+    });
+};
 
-export default getAllGames
+export default getAllGames;
