@@ -2,7 +2,8 @@ import express from "express";
 import {
     addMatchScore,
     getAllGames,
-    getLeaderboard
+    getLeaderboard,
+    getMyScore
 } from "../controllers/index.js";
 import { asyncEventHandler } from "../errors/errorUtils/index.js";
 import { errorMiddleware } from "../errors/errorMiddlewares/index.js";
@@ -17,7 +18,7 @@ router.get("/ping", (req, res) => {
 });
 
 router.patch(
-    "/addMatchScore",
+    "/add-match-score",
     verifyAccessToken,
     asyncEventHandler(addMatchScore)
 );
@@ -25,6 +26,7 @@ router.patch(
 router.get("/games", asyncEventHandler(getAllGames));
 
 router.get("/leaderboard/:gameId", asyncEventHandler(getLeaderboard));
+router.get("/get-my-score/:gameId", verifyAccessToken, asyncEventHandler(getMyScore));
 
 router.use(errorMiddleware);
 

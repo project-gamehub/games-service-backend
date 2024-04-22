@@ -46,7 +46,36 @@ class LeaderboardService {
             gameId,
             "-createdAt -updatedAt -__v"
         );
+
+        // Sorting the leaderboard 
+        leaderboard.data.sort((a, b) => {
+            if (a.score !== b.score) {
+                return b.score - a.score;
+            } else {
+                return b.totalMatches - a.totalMatches;
+            }
+        });
+        // Sending only top 10's data 
+        leaderboard.data = leaderboard.data.slice(0, 10);
         return leaderboard;
+    }
+
+    async getMyScore(gameId, userId) {
+        const scoreData = await this.leaderboardRepository.getLeaderboard(
+            gameId, "data -_id"
+        );
+        // Finding the data of the initiator
+        if (!scoreData) {
+            return {
+                userId,
+                "score": 0,
+                "totalMatches": 0,
+            }
+        }
+        const myScore = scoreData.data.find((currData) => {
+            return currData.userId == userId
+        });
+        return myScore;
     }
 }
 
