@@ -5,6 +5,11 @@ class GameRepository {
         const games = await Game.find({}, fields);
         return games;
     }
+
+    async getGameById(gameId) {
+        const game = await Game.findById(gameId);
+        return game;
+    }
 }
 
 export default GameRepository;

@@ -25,6 +25,14 @@ const leaderboardSchema = new mongoose.Schema(
                         type: Number,
                         required: true,
                         default: 1
+                    },
+                    lastScoreAddedDate: {
+                        type: Date,
+                        default: new Date()
+                    },
+                    scoresAddedToday: {
+                        type: Number,
+                        default: 0
                     }
                 }
             ],

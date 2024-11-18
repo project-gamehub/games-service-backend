@@ -5,8 +5,8 @@ const addMatchScore = async (req, res) => {
     const gameId = req.body?.gameId;
     const score = req.body?.score;
 
-    const userId = req.userId;
-    if (!score || !gameId) {
+    const userId = req.body?.userId;
+    if (!score || !gameId || !userId) {
         throw new customError(400, "Invalid data");
     }
     const leaderboardService = new LeaderboardService();

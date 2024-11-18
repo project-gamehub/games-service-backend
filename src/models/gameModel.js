@@ -32,6 +32,10 @@ const gameSchema = new mongoose.Schema(
         comingSoon: {
             type: Boolean,
             default: false
+        },
+        maxScoreAddAllowedPerDay: {
+            type: Number,
+            default: 999
         }
     },
     { timestamps: true }

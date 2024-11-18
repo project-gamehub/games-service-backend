@@ -17,16 +17,16 @@ router.get("/ping", (req, res) => {
     });
 });
 
-router.patch(
-    "/add-match-score",
-    verifyAccessToken,
-    asyncEventHandler(addMatchScore)
-);
+router.patch("/add-match-score", asyncEventHandler(addMatchScore));
 
 router.get("/games", asyncEventHandler(getAllGames));
 
 router.get("/leaderboard/:gameId", asyncEventHandler(getLeaderboard));
-router.get("/get-my-score/:gameId", verifyAccessToken, asyncEventHandler(getMyScore));
+router.get(
+    "/get-my-score/:gameId",
+    verifyAccessToken,
+    asyncEventHandler(getMyScore)
+);
 
 router.use(errorMiddleware);
 
