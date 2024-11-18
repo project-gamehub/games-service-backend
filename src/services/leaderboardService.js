@@ -41,41 +41,39 @@ class LeaderboardService {
 
         // If user is present, adding match score and updating match count
         if (user) {
-            if (user) {
-                if (isToday) {
-                    // Check if scoresAddedToday exceeds maxScoreAddAllowedPerDay
-                    if (user.scoresAddedToday >= maxScoreAddAllowedPerDay) {
-                        throw new customError(
-                            403,
-                            "Daily score limit reached for this user"
-                        );
-                    }
-                    // Update scoresAddedToday and add score
-                    user.scoresAddedToday += 1;
-                    user.lastScoreAddedDate = today;
-                } else {
-                    // Reset scoresAddedToday and update lastScoreAddedDate
-                    user.scoresAddedToday = 1;
-                    user.lastScoreAddedDate = today;
+            if (isToday) {
+                // Check if scoresAddedToday exceeds maxScoreAddAllowedPerDay
+                if (user.scoresAddedToday >= maxScoreAddAllowedPerDay) {
+                    throw new customError(
+                        403,
+                        "Daily score limit reached for this user"
+                    );
                 }
-
-                // Update score and totalMatches
-                user.score += parseInt(score);
-                user.totalMatches += 1;
+                // Update scoresAddedToday and add score
+                user.scoresAddedToday += 1;
+                user.lastScoreAddedDate = today;
             } else {
-                // If user does not exist, add new user to leaderboard
-                fullGameData.data.push({
-                    userId: UserId,
-                    score,
-                    totalMatches: 1,
-                    lastScoreAddedDate: today,
-                    scoresAddedToday: 1
-                });
+                // Reset scoresAddedToday and update lastScoreAddedDate
+                user.scoresAddedToday = 1;
+                user.lastScoreAddedDate = today;
             }
 
-            // Save the updated leaderboard
-            await fullGameData.save();
+            // Update score and totalMatches
+            user.score += parseInt(score);
+            user.totalMatches += 1;
+        } else {
+            // If user does not exist, add new user to leaderboard
+            fullGameData.data.push({
+                userId: UserId,
+                score,
+                totalMatches: 1,
+                lastScoreAddedDate: today,
+                scoresAddedToday: 1
+            });
         }
+
+        // Save the updated leaderboard
+        await fullGameData.save();
     }
 
     async getLeaderboard(gameId) {
