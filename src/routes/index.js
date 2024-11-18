@@ -22,11 +22,7 @@ router.patch("/add-match-score", asyncEventHandler(addMatchScore));
 router.get("/games", asyncEventHandler(getAllGames));
 
 router.get("/leaderboard/:gameId", asyncEventHandler(getLeaderboard));
-router.get(
-    "/get-my-score/:gameId",
-    verifyAccessToken,
-    asyncEventHandler(getMyScore)
-);
+router.get("/get-my-score/:gameId", asyncEventHandler(getMyScore));
 
 router.use(errorMiddleware);
 
