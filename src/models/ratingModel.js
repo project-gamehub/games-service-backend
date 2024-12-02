@@ -3,8 +3,7 @@ import mongoose from "mongoose";
 const ratingSchema = new mongoose.Schema(
     {
         gameId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Game",
+            type: String,
             required: true
         },
         rating: {
